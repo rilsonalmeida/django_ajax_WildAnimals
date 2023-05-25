@@ -2,4 +2,16 @@ console.log('It worked !!!')
 
 const HelloBox = document.getElementById('hello')
 
-HelloBox.innerHTML = 'It worked <b>perfectly</b> !!'
+$.ajax({
+    type: 'GET',
+    url: '/hello/',
+    success: function(response){
+        console.log('success', response.text)
+        HelloBox.innerHTML = response.text
+    },
+    error: function(error){
+        console.log('error', error)
+    }
+}
+
+)
