@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block scripts %}
+   <script src="{% static 'posts_app/scripts/main.js'%}" defer></script>
+{% endblock scripts %}
+
+{% block title %}Posts{% endblock title %}
+
+{% block content %}
+   <div class="container">
+    <h1>All Posts</h1>
+   </div>
+   <br>
+   <ul>
+   {% for post in posts %}
+      <li>
+        {{ post.title }} - {{ post.body }}
+      </li>
+   {% empty %}
+      Sorry... No published posts available
+   {% endfor %}
+    </ul>
+
+    <div id="hello">
+        
+    </div>
+{% endblock content %}
