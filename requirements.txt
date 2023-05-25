@@ -1,7 +1,10 @@
 asgiref==3.7.1
 Django==4.2.1
 django-crispy-forms==2.0
+django-extensions==3.2.1
 Pillow==9.5.0
+pydot==1.4.2
+pyparsing==3.0.9
 sqlparse==0.4.4
 typing_extensions==4.6.1
 tzdata==2023.3
