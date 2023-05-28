@@ -62,4 +62,13 @@ def like_unlike_post_view(request):
         return JsonResponse({'liked': liked, 'count': obj.like_count})
             
             
-            
+def post_detail_view(request, pk):
+    obj = Post.objects.get(pk=pk)            
+    form = PostForm()
+    
+    context = {
+        'obj': obj,
+        'form': form
+    }
+    
+    return render(request, 'posts_app/detail.html', context)
