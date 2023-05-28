@@ -1,17 +1,39 @@
-console.log('It worked !!!')
+const postsBox = document.getElementById('posts-box')
+const spinnerBox = document.getElementById('spinner-box')
 
-const HelloBox = document.getElementById('hello')
 
 $.ajax({
     type: 'GET',
-    url: '/hello/',
+    url: '/posts/',
     success: function(response){
-        console.log('success', response.text)
-        HelloBox.innerHTML = response.text
+        console.log(response)
+        const data = response.data
+        setTimeout(()=>{
+            spinnerBox.classList.add('no-visible')
+            console.log(data)
+            data.forEach(el =>{
+                postsBox.innerHTML += `
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <h5 class="card-title">${el.title}</h5>
+                            <p class="card-text">${el.body}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-1">
+                                    <a href="#" class="btn btn-primary">Details</a>
+                                </div>
+                                <div class="col-1">
+                                    <a href="#" class="btn btn-primary">Like</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            })
+        }, 100)
     },
     error: function(error){
-        console.log('error', error)
+        console.log(error)
     }
-}
-
-)
+});

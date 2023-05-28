@@ -13,17 +13,9 @@
     <h1>All Posts</h1>
    </div>
    <br>
-   <ul>
-   {% for post in posts %}
-      <li>
-        {{ post.title }} - {{ post.body }}
-      </li>
-   {% empty %}
-      Sorry... No published posts available
-   {% endfor %}
-    </ul>
 
-    <div id="hello">
-        
-    </div>
+   <div id="spinner-box" class="text-center">
+      <div class="spinner-border" role="status"></div>
+   </div>
+   <div id="posts-box"></div>
 {% endblock content %}
