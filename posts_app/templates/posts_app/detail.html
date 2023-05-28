@@ -1,16 +1,23 @@
 {% extends 'base.html' %}
 
-{% load crispy_forms_tags %}
+{% load static %}
 
 {% block scripts %}
+   <script src="{% static 'posts_app/scripts/detail.js' %}" defer></script>
 {% endblock scripts %}
 
 {% block title %}Post Detail{% endblock %}
 
 
 {% block content %}
-   <h1>Detail of {{ obj.title }}</h1>
-    <hr>
-   <h3>{{ obj.body }}</h3>
-   <h3>{{ obj.author.user.username }}</h3>
+   <button id="back-btn" class="btn btn-info">back</button>
+   <button id="update-btn" class="btn btn-primary no-visible">update</button>
+   <button id="delete-btn" class="btn btn-danger no-visible">delete</button>
+
+   <div id="spinner-box" class="text-center">
+        <div class="spinner-border" role="status"></div>
+    </div>
+   <div id="post-box" class="mt-1">
+
+   </div>
 {% endblock %}
