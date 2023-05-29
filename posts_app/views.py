@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Post
+from .models import Post, Photo
 from profiles_app.models import Profile
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from .forms import PostForm
 
 
@@ -108,3 +108,13 @@ def delete_post_view(request, pk):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         obj.delete()
         return JsonResponse({})
+    
+    
+def image_upload_view(request):
+    if request.method == 'POST':
+        img = request.FILES.get('file')
+        new_post_id = request.POST.get('new_post_id')
+        post = Post.objects.get(id=new_post_id) 
+        Photo.objects.create(post_photo=post, image=img)
+    return HttpResponse()
+            
