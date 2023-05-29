@@ -1,0 +1,12 @@
+.no-visible {
+    display: none;
+}
+
+.dz {
+    border: dashed !important;
+    border-radius: 10px !important;
+    color: #ccc !important;
+}
+.dz:hover {
+    background-color: grey !important;
+}
