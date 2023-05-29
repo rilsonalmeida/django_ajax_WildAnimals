@@ -188,6 +188,8 @@ closeBtns.forEach(btn=>btn.addEventListener('click', ()=>{
         if (!myDropzone.classList.contains('no-visible')){
             myDropzone.classList.add('no-visible')
         }
+        const myFiles = Dropzone.forElement('#my-dropzone')
+        myFiles.removeAllFiles(true)
     })
 )
 
