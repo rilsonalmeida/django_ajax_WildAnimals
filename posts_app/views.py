@@ -88,3 +88,23 @@ def post_detail_data_view(request, pk):
     return JsonResponse({'data': data})
 
     
+def update_post_view(request, pk):
+    obj = Post.objects.get(pk=pk)
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        new_title = request.POST.get('title')
+        new_body = request.POST.get('body')
+        obj.title = new_title
+        obj.body = new_body
+        obj.save()
+        return JsonResponse({
+            'title': new_title,
+            'body': new_body
+        })   
+
+
+
+def delete_post_view(request, pk):
+    obj = Post.objects.get(pk=pk)
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        obj.delete()
+        return JsonResponse({})

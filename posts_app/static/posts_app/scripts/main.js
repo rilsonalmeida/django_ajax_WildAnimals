@@ -29,6 +29,12 @@ const getCookie = (name)=> {
 
 const csrftoken = getCookie('csrftoken');
 
+const deleted_title = localStorage.getItem('title')
+if (deleted_title) {
+    handleAlerts('danger', `Post with title "<b>${deleted_title}</b>" was deleted!`)
+    localStorage.clear()
+}
+
 const likeUnlikePosts = ()=> {
     const likeUnlikeForms = [...document.getElementsByClassName('like-unlike-forms')]
 
