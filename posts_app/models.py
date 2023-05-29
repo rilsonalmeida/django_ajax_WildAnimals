@@ -16,5 +16,16 @@ class Post(TimestampableMixin):
     def like_count(self):
         return self.liked.all().count()
     
+    def get_photos(self):
+        return self.photo_set.all()
+    
     class Meta:
         ordering = ('-created_at', )
+        
+        
+class Photo(TimestampableMixin):
+    post_photo = models.ForeignKey(Post, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="photos")
+    
+    def __str__(self):
+        return f"{self.post_photo.title}-{self.pk}"
