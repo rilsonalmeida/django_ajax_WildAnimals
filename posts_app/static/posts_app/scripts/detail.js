@@ -11,6 +11,9 @@ const url = window.location.href + 'data/'
 
 const spinnerBox = document.getElementById('spinner-box')
 
+const titleInput = document.getElementById('id_title')
+const bodyInput = document.getElementById('id_body')
+
 
 backBtn.addEventListener('click',()=>{
     history.back()
@@ -31,6 +34,9 @@ $.ajax({
             updateBtn.classList.remove('no-visible')
             deleteBtn.classList.remove('no-visible')
         }
+
+        titleInput.value = data.title
+        bodyInput.value = data.body
 
         const titleEl = document.createElement('h3')
         titleEl.setAttribute('class', 'mt-3')
