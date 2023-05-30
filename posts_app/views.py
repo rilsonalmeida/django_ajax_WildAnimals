@@ -3,8 +3,11 @@ from .models import Post, Photo
 from profiles_app.models import Profile
 from django.http import JsonResponse, HttpResponse
 from .forms import PostForm
+from .utils import action_permission
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def post_list_and_create_view(request):
     form = PostForm(request.POST or None)
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -26,6 +29,7 @@ def post_list_and_create_view(request):
     return render(request, 'posts_app/main.html', context)
 
 
+@login_required
 def load_post_data_view(request, num_posts):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         visible = 3
@@ -48,6 +52,7 @@ def load_post_data_view(request, num_posts):
         return JsonResponse({'data': data[lower:upper], 'size': size})
 
 
+@login_required
 def like_unlike_post_view(request):
     # if request.is_ajax():  # deprecated funtion since Django 3.1 and removed in Django 4
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -61,7 +66,7 @@ def like_unlike_post_view(request):
             obj.liked.add(request.user)
         return JsonResponse({'liked': liked, 'count': obj.like_count})
             
-            
+@login_required           
 def post_detail_view(request, pk):
     obj = Post.objects.get(pk=pk)            
     form = PostForm()
@@ -73,7 +78,7 @@ def post_detail_view(request, pk):
     
     return render(request, 'posts_app/detail.html', context)
 
-
+@login_required
 def post_detail_data_view(request, pk):
     obj = Post.objects.get(pk=pk)            
     
@@ -87,7 +92,8 @@ def post_detail_data_view(request, pk):
     
     return JsonResponse({'data': data})
 
-    
+@login_required
+@action_permission  
 def update_post_view(request, pk):
     obj = Post.objects.get(pk=pk)
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -102,14 +108,17 @@ def update_post_view(request, pk):
         })   
 
 
-
+@login_required
+@action_permission
 def delete_post_view(request, pk):
     obj = Post.objects.get(pk=pk)
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         obj.delete()
-        return JsonResponse({})
+        return JsonResponse({'msg': 'Post deleted'})
+    return JsonResponse({'msg': 'access denied - Ajax only'})
     
     
+@login_required    
 def image_upload_view(request):
     if request.method == 'POST':
         img = request.FILES.get('file')
