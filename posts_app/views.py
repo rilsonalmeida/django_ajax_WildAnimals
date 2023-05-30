@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post, Photo
 from profiles_app.models import Profile
 from django.http import JsonResponse, HttpResponse
@@ -50,6 +50,8 @@ def load_post_data_view(request, num_posts):
             }
             data.append(item)
         return JsonResponse({'data': data[lower:upper], 'size': size})
+    
+    return redirect('posts_app:main-page')
 
 
 @login_required
@@ -65,6 +67,7 @@ def like_unlike_post_view(request):
             liked = True
             obj.liked.add(request.user)
         return JsonResponse({'liked': liked, 'count': obj.like_count})
+    return redirect('posts_app:main-page')
             
 @login_required           
 def post_detail_view(request, pk):
@@ -106,7 +109,7 @@ def update_post_view(request, pk):
             'title': new_title,
             'body': new_body
         })   
-
+    return redirect('posts_app:main-page')
 
 @login_required
 @action_permission
@@ -115,8 +118,8 @@ def delete_post_view(request, pk):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         obj.delete()
         return JsonResponse({'msg': 'Post deleted'})
-    return JsonResponse({'msg': 'access denied - Ajax only'})
-    
+    # return JsonResponse({'msg': 'access denied - Ajax only'})
+    return redirect('posts_app:main-page')
     
 @login_required    
 def image_upload_view(request):

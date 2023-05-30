@@ -27,8 +27,8 @@
                         {% csrf_token %}
                         {{ form|crispy }}
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
-                        <button type="submit" class="btn btn-success">update</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
+                            <button type="submit" class="btn btn-success">update</button>
                         </div>
                     </form>
                 </div>
@@ -71,7 +71,8 @@
             <div class="carousel-inner">
                 {% for p in obj.get_photos %}
                     <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %} mb-2">
-                        <img src="{{p.image.url}}" class="d-block w-100" alt="photo {obj.pk}">
+                        {% comment %} <img src="{{p.image.url}}" class="d-block w-100" alt="photo {obj.pk}"> {% endcomment %}
+                        <img src="{{p.image.url}}" class="post-image" alt="photo {obj.pk}">
                     </div>
                 {% endfor %}
             </div>

@@ -1,28 +1,22 @@
 {% load static %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid"> 
-       <a class="navbar-brand" href="{% url 'posts_app:main-page' %}">
-           <img src="{% static 'images/hippo-solid.svg' %} " id="img-app" 
-           alt="Wild_Animals" style="fill: yellow;">
-           <span class="title-app" >Wild Animals</span>
-       </a>
-       <a class="navbar-brand" href="{% url 'profiles_app:my-profile' %}">My Profile</a>
+    <div class="container-fluid">   
+       <a class="navbar-brand" href="{% url 'posts_app:main-page' %}"><img src="{% static 'images/icons_contract_64x64_sigeco.jpeg' %}" alt="SIGECO"> Posts</a>
        <button class="navbar-toggler">
         <span class="navbar-toggler-icon"></span>
        </button>
          {% if user.is_authenticated %}
            <div class="form-inline my-2 my-lg-0">
-             <p class="mr-2" style="color:yellow;"> logged as: <a class="clean-link" 
-                       href="{% url 'profiles_app:my-profile' %}">{{ user.username }}</a></p>
+             <p class="mr-2" style="color:yellow;"> usuário: <a class="clean-link" href="#">{{ user.username }}</a></p>
              {% comment %} <a href="{% url 'logout' %}">
                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sair</button>
              </a> {% endcomment %}
            </div>
          {% else %}
-           <p class="p-2" style="color:yellow;">User not logged in<p>
+           <p class="p-2" style="color:yellow;">Usuário não logado<p>
            <a href="{% url 'admin' %}">
-             <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Enter</button>
+             <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Entrar</button>
            </a>
            {% comment %} <a href="{% url 'register' %}">
              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Registrar</button>

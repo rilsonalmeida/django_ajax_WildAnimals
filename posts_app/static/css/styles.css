@@ -10,3 +10,20 @@
 .dz:hover {
     background-color: grey !important;
 }
+
+
+.title-app {
+    color: yellow;
+    font-size: 2rem;
+}
+#img-app {
+    width: 85px;
+    height: 85px;
+    fill: orangered;
+}
+
+.post-image {
+    max-width: 480px;
+    max-height: 480px;
+    width: 100%;
+}
